@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD53ADB01F07FD7900BDE5DC /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD53ADAF1F07FD7900BDE5DC /* enums.swift */; };
+		BDAA08CD1F0BF85A0064DE7F /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */; };
 		BDF860C81EFD5F66004EDBF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */; };
 		BDF860CA1EFD5F66004EDBF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF860C91EFD5F66004EDBF0 /* ViewController.swift */; };
 		BDF860CD1EFD5F66004EDBF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF860CB1EFD5F66004EDBF0 /* Main.storyboard */; };
 		BDF860D01EFD5F66004EDBF0 /* Dictionary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDF860CE1EFD5F66004EDBF0 /* Dictionary.xcdatamodeld */; };
 		BDF860D21EFD5F66004EDBF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDF860D11EFD5F66004EDBF0 /* Assets.xcassets */; };
 		BDF860D51EFD5F66004EDBF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF860D31EFD5F66004EDBF0 /* LaunchScreen.storyboard */; };
+		BDF860DD1EFD76B7004EDBF0 /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF860DC1EFD76B7004EDBF0 /* WordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD53ADAF1F07FD7900BDE5DC /* enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
+		BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionCheck.swift; path = ../ConnectionCheck.swift; sourceTree = "<group>"; };
 		BDF860C41EFD5F66004EDBF0 /* Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BDF860C91EFD5F66004EDBF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +29,7 @@
 		BDF860D11EFD5F66004EDBF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDF860D41EFD5F66004EDBF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDF860D61EFD5F66004EDBF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BDF860DC1EFD76B7004EDBF0 /* WordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +43,91 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD1180711F52E1E7006A2C2B /* common */ = {
+			isa = PBXGroup;
+			children = (
+				BD1180731F52E1FB006A2C2B /* app */,
+				BD1180721F52E1F1006A2C2B /* utilities */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		BD1180721F52E1F1006A2C2B /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */,
+			);
+			name = utilities;
+			sourceTree = "<group>";
+		};
+		BD1180731F52E1FB006A2C2B /* app */ = {
+			isa = PBXGroup;
+			children = (
+				BD1180761F52E214006A2C2B /* controller */,
+				BD1180751F52E210006A2C2B /* view */,
+				BD1180741F52E20B006A2C2B /* model */,
+			);
+			name = app;
+			sourceTree = "<group>";
+		};
+		BD1180741F52E20B006A2C2B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				BD53ADAF1F07FD7900BDE5DC /* enums.swift */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		BD1180751F52E210006A2C2B /* view */ = {
+			isa = PBXGroup;
+			children = (
+				BDF860CB1EFD5F66004EDBF0 /* Main.storyboard */,
+				BDF860D31EFD5F66004EDBF0 /* LaunchScreen.storyboard */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		BD1180761F52E214006A2C2B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */,
+				BDF860C91EFD5F66004EDBF0 /* ViewController.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		BD1180771F52E260006A2C2B /* arabicTranslation */ = {
+			isa = PBXGroup;
+			children = (
+				BD11807A1F52E27A006A2C2B /* controller */,
+				BD1180791F52E274006A2C2B /* view */,
+				BD1180781F52E270006A2C2B /* model */,
+			);
+			name = arabicTranslation;
+			sourceTree = "<group>";
+		};
+		BD1180781F52E270006A2C2B /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		BD1180791F52E274006A2C2B /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		BD11807A1F52E27A006A2C2B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				BDF860DC1EFD76B7004EDBF0 /* WordViewController.swift */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
 		BDF860BB1EFD5F66004EDBF0 = {
 			isa = PBXGroup;
 			children = (
@@ -56,11 +147,9 @@
 		BDF860C61EFD5F66004EDBF0 /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
-				BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */,
-				BDF860C91EFD5F66004EDBF0 /* ViewController.swift */,
-				BDF860CB1EFD5F66004EDBF0 /* Main.storyboard */,
+				BD1180771F52E260006A2C2B /* arabicTranslation */,
+				BD1180711F52E1E7006A2C2B /* common */,
 				BDF860D11EFD5F66004EDBF0 /* Assets.xcassets */,
-				BDF860D31EFD5F66004EDBF0 /* LaunchScreen.storyboard */,
 				BDF860D61EFD5F66004EDBF0 /* Info.plist */,
 				BDF860CE1EFD5F66004EDBF0 /* Dictionary.xcdatamodeld */,
 			);
@@ -99,6 +188,7 @@
 				TargetAttributes = {
 					BDF860C31EFD5F66004EDBF0 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = SJWBSQJ789;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -139,8 +229,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDAA08CD1F0BF85A0064DE7F /* ConnectionCheck.swift in Sources */,
+				BD53ADB01F07FD7900BDE5DC /* enums.swift in Sources */,
 				BDF860D01EFD5F66004EDBF0 /* Dictionary.xcdatamodeld in Sources */,
 				BDF860CA1EFD5F66004EDBF0 /* ViewController.swift in Sources */,
+				BDF860DD1EFD76B7004EDBF0 /* WordViewController.swift in Sources */,
 				BDF860C81EFD5F66004EDBF0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,11 +357,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SJWBSQJ789;
 				INFOPLIST_FILE = Dictionary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordan.Dictionary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -276,11 +372,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = SJWBSQJ789;
 				INFOPLIST_FILE = Dictionary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jordan.Dictionary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -303,6 +402,7 @@
 				BDF860DB1EFD5F66004EDBF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
