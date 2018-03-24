@@ -10,13 +10,14 @@ import UIKit
 
 class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var wordLabel: UILabel!
+    
     var wordId: NSUUID?
     var PartOfSpeechArray : [(partOfSpeechText: String , record : (Ids : [NSUUID] , Meanings : [String]))] = [("",([],[]))]
     var wordText: String?
     
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         wordLabel.text = wordText
@@ -79,89 +80,94 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     
     func wordTranslation(){
         
-        if let id =  wordId {
-            //2CF6360E-B325-CB47-98D5-C61AFE408AB1
-            let url = URL(string: "http://spokenarabicdictionary.azurewebsites.net/api/English/translate?Id=" + id.uuidString )
-            activityIndicator.startAnimating()
-            activityIndicator.alpha = 1
-            let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                
-                if error != nil {
-                    self.activityIndicator.stopAnimating()
-                    self.activityIndicator.alpha = 0
-                    print(error ?? "error at translate")
-                    
-                } else {
-                    
-                    if  let urlContent = data {
-                        
-                        do{
-                            
-                            let JSONResult = try JSONSerialization.jsonObject(with: urlContent, options: .mutableContainers) as! [[String : AnyObject]]
-                            
-                            for item in partOfSpeech {
-                                
-                                self.PartOfSpeechArray.append((partOfSpeechText: item , record: (Ids: [], Meanings: [])))
-                            }
-                            
-                            for item in JSONResult {
-                                
-                                if let partOfSpeechValue = item["PART_OF_SPEECH"]  {
-                                    
-                                    var tempWord : String?
-                                    var tempId : NSUUID?
-                                    
-                                    if let wordText = item["WORD"]{
-                                        
-                                        tempWord = (wordText as! String)
-                                    }
-                                    if let idValue = item["ID"]{
-                                        
-                                        tempId = (NSUUID(uuidString: (idValue as! String))!)
-                                    }
-                                    
-                                    if tempId != nil && tempWord != nil && partOfSpeechValue as? Int != nil{
-                                        
-                                        self.PartOfSpeechArray[(partOfSpeechValue as! Int) + 1].record.Ids.append(tempId!)
-                                        self.PartOfSpeechArray[(partOfSpeechValue as! Int) + 1].record.Meanings.append(tempWord!)
-                                    }
-                                    
-                                }
-                            }
-                            self.PartOfSpeechArray[1].partOfSpeechText = ""
-                            var i = 0
-                            for speechPart in self.PartOfSpeechArray {
-                                
-                                if !(speechPart.record.Meanings.count > 0) {
-                                    
-                                    self.PartOfSpeechArray.remove(at: i)
-                                }else{
-                                    i += 1
-                                }
-                                
-                            }
-                        }
-                        catch {
-                            
-                            print("json serialization fialed")
-                            
-                        }
-                        
-                        DispatchQueue.main.sync(execute: {
-                            
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.alpha = 0
-                            self.tableView.reloadData()
-                            
-                        })
-                        
-                    }
-                }
-            })
-            
-            task.resume()
-        }
-        
     }
+    
+    //MARK: translation func was used in the online version
+//    func wordTranslation(){
+//
+//        if let id =  wordId {
+//            //2CF6360E-B325-CB47-98D5-C61AFE408AB1
+//            let url = URL(string: "http://spokenarabicdictionary.azurewebsites.net/api/English/translate?Id=" + id.uuidString )
+//            activityIndicator.startAnimating()
+//            activityIndicator.alpha = 1
+//            let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+//
+//                if error != nil {
+//                    self.activityIndicator.stopAnimating()
+//                    self.activityIndicator.alpha = 0
+//                    print(error ?? "error at translation")
+//
+//                } else {
+//
+//                    if  let urlContent = data {
+//
+//                        do{
+//
+//                            let JSONResult = try JSONSerialization.jsonObject(with: urlContent, options: .mutableContainers) as! [[String : AnyObject]]
+//
+//                            for item in partOfSpeech {
+//
+//                                self.PartOfSpeechArray.append((partOfSpeechText: item , record: (Ids: [], Meanings: [])))
+//                            }
+//
+//                            for item in JSONResult {
+//
+//                                if let partOfSpeechValue = item["PART_OF_SPEECH"]  {
+//
+//                                    var tempWord : String?
+//                                    var tempId : NSUUID?
+//
+//                                    if let wordText = item["WORD"]{
+//
+//                                        tempWord = (wordText as! String)
+//                                    }
+//                                    if let idValue = item["ID"]{
+//
+//                                        tempId = (NSUUID(uuidString: (idValue as! String))!)
+//                                    }
+//
+//                                    if tempId != nil && tempWord != nil && partOfSpeechValue as? Int != nil{
+//
+//                                        self.PartOfSpeechArray[(partOfSpeechValue as! Int) + 1].record.Ids.append(tempId!)
+//                                        self.PartOfSpeechArray[(partOfSpeechValue as! Int) + 1].record.Meanings.append(tempWord!)
+//                                    }
+//
+//                                }
+//                            }
+//                            self.PartOfSpeechArray[1].partOfSpeechText = ""
+//                            var i = 0
+//                            for speechPart in self.PartOfSpeechArray {
+//
+//                                if !(speechPart.record.Meanings.count > 0) {
+//
+//                                    self.PartOfSpeechArray.remove(at: i)
+//                                }else{
+//                                    i += 1
+//                                }
+//
+//                            }
+//                        }
+//                        catch {
+//
+//                            print("json serialization fialed")
+//
+//                        }
+//
+//                        DispatchQueue.main.sync(execute: {
+//
+//                            self.activityIndicator.stopAnimating()
+//                            self.activityIndicator.alpha = 0
+//                            self.tableView.reloadData()
+//
+//                        })
+//
+//                    }
+//                }
+//            })
+//
+//            task.resume()
+//        }
+//
+//    }
     
 }
