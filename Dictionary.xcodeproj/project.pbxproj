@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BD14590B2065B8B900D8AF28 /* EnglishWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD14590A2065B8B800D8AF28 /* EnglishWord.swift */; };
-		BD14590D2065DA7E00D8AF28 /* ArabicWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD14590C2065DA7E00D8AF28 /* ArabicWord.swift */; };
-		BD14590F2065DABA00D8AF28 /* Conjugation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD14590E2065DAB900D8AF28 /* Conjugation.swift */; };
+		BD145913206677EF00D8AF28 /* ArabicWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD145910206677EF00D8AF28 /* ArabicWord.swift */; };
+		BD145914206677EF00D8AF28 /* Conjugation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD145911206677EF00D8AF28 /* Conjugation.swift */; };
+		BD145915206677EF00D8AF28 /* EnglishWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD145912206677EF00D8AF28 /* EnglishWord.swift */; };
 		BD53ADB01F07FD7900BDE5DC /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD53ADAF1F07FD7900BDE5DC /* enums.swift */; };
 		BD95CE191F534FFF00E8315C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD95CE181F534FFF00E8315C /* StoreKit.framework */; };
 		BDAA08CD1F0BF85A0064DE7F /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */; };
 		BDF2BB7620652A2200B146A8 /* Arabic-Words.json in Resources */ = {isa = PBXBuildFile; fileRef = BDF2BB7320652A2200B146A8 /* Arabic-Words.json */; };
-		BDF2BB7720652A2200B146A8 /* English-Word.json in Resources */ = {isa = PBXBuildFile; fileRef = BDF2BB7420652A2200B146A8 /* English-Word.json */; };
+		BDF2BB7720652A2200B146A8 /* English-Words.json in Resources */ = {isa = PBXBuildFile; fileRef = BDF2BB7420652A2200B146A8 /* English-Words.json */; };
 		BDF2BB7820652A2200B146A8 /* Conjugations.json in Resources */ = {isa = PBXBuildFile; fileRef = BDF2BB7520652A2200B146A8 /* Conjugations.json */; };
 		BDF2BB7A20652D6700B146A8 /* appConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2BB7920652D6700B146A8 /* appConstants.swift */; };
 		BDF2BB7C20652E8300B146A8 /* appMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2BB7B20652E8300B146A8 /* appMethods.swift */; };
@@ -28,14 +28,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BD14590A2065B8B800D8AF28 /* EnglishWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EnglishWord.swift; path = ../../../../EnglishWord.swift; sourceTree = "<group>"; };
-		BD14590C2065DA7E00D8AF28 /* ArabicWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArabicWord.swift; path = ../../../../ArabicWord.swift; sourceTree = "<group>"; };
-		BD14590E2065DAB900D8AF28 /* Conjugation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Conjugation.swift; path = ../../../../Conjugation.swift; sourceTree = "<group>"; };
+		BD145910206677EF00D8AF28 /* ArabicWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArabicWord.swift; sourceTree = "<group>"; };
+		BD145911206677EF00D8AF28 /* Conjugation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conjugation.swift; sourceTree = "<group>"; };
+		BD145912206677EF00D8AF28 /* EnglishWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnglishWord.swift; sourceTree = "<group>"; };
 		BD53ADAF1F07FD7900BDE5DC /* enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
 		BD95CE181F534FFF00E8315C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionCheck.swift; path = ../ConnectionCheck.swift; sourceTree = "<group>"; };
 		BDF2BB7320652A2200B146A8 /* Arabic-Words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Arabic-Words.json"; sourceTree = SOURCE_ROOT; };
-		BDF2BB7420652A2200B146A8 /* English-Word.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "English-Word.json"; sourceTree = SOURCE_ROOT; };
+		BDF2BB7420652A2200B146A8 /* English-Words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "English-Words.json"; sourceTree = SOURCE_ROOT; };
 		BDF2BB7520652A2200B146A8 /* Conjugations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Conjugations.json; sourceTree = SOURCE_ROOT; };
 		BDF2BB7920652D6700B146A8 /* appConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appConstants.swift; sourceTree = "<group>"; };
 		BDF2BB7B20652E8300B146A8 /* appMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appMethods.swift; sourceTree = "<group>"; };
@@ -112,9 +112,9 @@
 		BD1180781F52E270006A2C2B /* model */ = {
 			isa = PBXGroup;
 			children = (
-				BD14590E2065DAB900D8AF28 /* Conjugation.swift */,
-				BD14590C2065DA7E00D8AF28 /* ArabicWord.swift */,
-				BD14590A2065B8B800D8AF28 /* EnglishWord.swift */,
+				BD145910206677EF00D8AF28 /* ArabicWord.swift */,
+				BD145911206677EF00D8AF28 /* Conjugation.swift */,
+				BD145912206677EF00D8AF28 /* EnglishWord.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -182,7 +182,7 @@
 			children = (
 				BDF2BB7320652A2200B146A8 /* Arabic-Words.json */,
 				BDF2BB7520652A2200B146A8 /* Conjugations.json */,
-				BDF2BB7420652A2200B146A8 /* English-Word.json */,
+				BDF2BB7420652A2200B146A8 /* English-Words.json */,
 				BD1180771F52E260006A2C2B /* arabicTranslation */,
 				BD1180711F52E1E7006A2C2B /* common */,
 				BDF860D11EFD5F66004EDBF0 /* Assets.xcassets */,
@@ -257,7 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF2BB7720652A2200B146A8 /* English-Word.json in Resources */,
+				BDF2BB7720652A2200B146A8 /* English-Words.json in Resources */,
 				BDF2BB7820652A2200B146A8 /* Conjugations.json in Resources */,
 				BDF860D51EFD5F66004EDBF0 /* LaunchScreen.storyboard in Resources */,
 				BDF860D21EFD5F66004EDBF0 /* Assets.xcassets in Resources */,
@@ -274,16 +274,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDF2BB7C20652E8300B146A8 /* appMethods.swift in Sources */,
-				BD14590B2065B8B900D8AF28 /* EnglishWord.swift in Sources */,
+				BD145915206677EF00D8AF28 /* EnglishWord.swift in Sources */,
+				BD145914206677EF00D8AF28 /* Conjugation.swift in Sources */,
 				BDAA08CD1F0BF85A0064DE7F /* ConnectionCheck.swift in Sources */,
+				BD145913206677EF00D8AF28 /* ArabicWord.swift in Sources */,
 				BD53ADB01F07FD7900BDE5DC /* enums.swift in Sources */,
 				BDF860D01EFD5F66004EDBF0 /* Dictionary.xcdatamodeld in Sources */,
 				BDF860CA1EFD5F66004EDBF0 /* ViewController.swift in Sources */,
 				BDF860DD1EFD76B7004EDBF0 /* WordViewController.swift in Sources */,
 				BDF860C81EFD5F66004EDBF0 /* AppDelegate.swift in Sources */,
 				BDF2BB7A20652D6700B146A8 /* appConstants.swift in Sources */,
-				BD14590F2065DABA00D8AF28 /* Conjugation.swift in Sources */,
-				BD14590D2065DA7E00D8AF28 /* ArabicWord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

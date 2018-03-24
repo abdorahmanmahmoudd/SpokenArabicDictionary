@@ -18,12 +18,12 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
     var ArabicWords = [ArabicWord]()
     var Conjugations = [Conjugation]()
     var SearchResults = [EnglishWord]()
+    var selectedWord : EnglishWord?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configuration()
-        
         fetchDataFromFiles()
     }
     
@@ -34,6 +34,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain,
                                                                 target: nil, action: nil)
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGesture)
     
     }
@@ -61,17 +62,11 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
         
         activityIndicator.startAnimating()
         
-        if let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first {
+        DispatchQueue.global(qos: .userInitiated).async {
             
-            let documentsURL = URL(fileURLWithPath: documentsDirectory)
-            
-            let arabicFilePath = documentsURL.appendingPathComponent(ArabicWordsFile)
-            let englishFilePath = documentsURL.appendingPathComponent(EnglishWordsFile)
-            let conjugationsFilePath = documentsURL.appendingPathComponent(ConjugationsFile)
-            
-            DispatchQueue.global(qos: .userInitiated).async {
-            
-                do {
+            do {
+                if let englishFilePath = Bundle.main.url(forResource: EnglishWordsFile, withExtension: ".json"){
+                    
                     if let fileData = try? Data.init(contentsOf: englishFilePath, options: .mappedIfSafe){
                         
                         let json = try JSONSerialization.jsonObject(with: fileData, options: .mutableContainers)
@@ -83,6 +78,9 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
                             }
                         }
                     }
+                }
+                if let arabicFilePath = Bundle.main.url(forResource: ArabicWordsFile, withExtension: ".json"){
+                    
                     if let fileData = try? Data.init(contentsOf: arabicFilePath, options: .mappedIfSafe){
                         
                         let json = try JSONSerialization.jsonObject(with: fileData, options: .mutableContainers)
@@ -94,6 +92,9 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
                             }
                         }
                     }
+                }
+                if let conjugationsFilePath = Bundle.main.url(forResource: ConjugationsFile, withExtension: ".json"){
+                    
                     if let fileData = try? Data.init(contentsOf: conjugationsFilePath, options: .mappedIfSafe){
                         
                         let json = try JSONSerialization.jsonObject(with: fileData, options: .mutableContainers)
@@ -105,19 +106,19 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
                             }
                         }
                     }
-                    
-                    DispatchQueue.main.async {
-                        self.activityIndicator.stopAnimating()
-                    }
-                    
-                }catch let err {
-                    DispatchQueue.main.async {
-                        self.activityIndicator.stopAnimating()
-                        showAlert(title: "", message: err.localizedDescription, vc: self, closure: nil)
-                    }
                 }
                 
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                }
+                
+            }catch let err {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    showAlert(title: "", message: err.localizedDescription, vc: self, closure: nil)
+                }
             }
+            
         }
     }
     
@@ -132,14 +133,21 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
         cell.textLabel?.text = self.SearchResults[indexPath.row].wORD
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        selectedWord = SearchResults[indexPath.row]
+        self.performSegue(withIdentifier: "wordSegue", sender: self)
+    }
 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "wordSegue" {
-            if let indexPath = tableView.indexPathForSelectedRow {
-                let destinationController = segue.destination as! WordViewController
-//                destinationController.wordText = self.SearchResults[indexPath.row]
-//                destinationController.wordId = self.SearchResultsIds[indexPath.row]
+            if let destinationController = segue.destination as? WordViewController{
+                destinationController.selectedWord = self.selectedWord
+                destinationController.matchedArabicWords = ArabicWords.filter({ (word) -> Bool in
+                    return word.eNGLISHWORDID == self.selectedWord?.iD
+                })
             }
         }
     }
@@ -152,10 +160,21 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
             self.SearchResults.removeAll()
             
             self.SearchResults = EnglishWords.filter({ (enWord) -> Bool in
-                return enWord.wORD.contains(searchBar.text!)
+                return enWord.wORD.lowercased().contains(searchBar.text!.lowercased())
             })
+            //order results descending
+//            self.SearchResults.sort(by: { (word1, word2) -> Bool in
+//                return word1.wORD.
+//            })
             
             tableView.reloadData()
+            activityIndicator.stopAnimating()
+            
+            if SearchResults.count == 0{
+                
+                let NoResultAlert = UIAlertController(title: nil, message: "No results",preferredStyle: .alert)
+                NoResultAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            }
             
         }
     }

@@ -15,15 +15,15 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @IBOutlet var wordLabel: UILabel!
     
     var wordId: NSUUID?
-    var PartOfSpeechArray : [(partOfSpeechText: String , record : (Ids : [NSUUID] , Meanings : [String]))] = [("",([],[]))]
-    var wordText: String?
+    var PartOfSpeechArray : [(partOfSpeechText: String , words : [ArabicWord])] = [("",[])]
+    var selectedWord : EnglishWord?
+    var matchedArabicWords = [ArabicWord]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        wordLabel.text = wordText
-        wordTranslation()
-        tableView.tableFooterView = UIView(frame:CGRect.zero)
         
+        configuration()
+        fillData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,14 +31,19 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // Dispose of any resources that can be recreated.
     }
     
+    func configuration(){
+    
+        tableView.tableFooterView = UIView(frame:CGRect.zero)
+    }
+    
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return PartOfSpeechArray[section].record.Meanings.count
+        return PartOfSpeechArray[section].words.count
     }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cellIdentifier = "DetailsCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
-        cell.textLabel?.text = PartOfSpeechArray[indexPath.section].record.Meanings[indexPath.row]
+        cell.textLabel?.text = PartOfSpeechArray[indexPath.section].words[indexPath.row].wORD
         
         return cell
     }
@@ -78,8 +83,32 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 
     }
     
-    func wordTranslation(){
+    func fillData(){
         
+        activityIndicator.startAnimating()
+        if let word = selectedWord{
+            
+            self.wordLabel.text = word.wORD
+            
+            for item in partOfSpeech {
+                
+                self.PartOfSpeechArray.append((partOfSpeechText: item , words: []))
+            }
+            
+            for word in matchedArabicWords{
+                
+                if let partOfSpeech = Int(word.pARTOFSPEECH){
+                    
+                    self.PartOfSpeechArray[partOfSpeech + 1].words.append(word)
+                }
+            }
+            self.PartOfSpeechArray = self.PartOfSpeechArray.filter({ (part) -> Bool in
+                return part.words.count > 0
+            })
+            
+            //order words descending
+        }
+        activityIndicator.stopAnimating()
     }
     
     //MARK: translation func was used in the online version

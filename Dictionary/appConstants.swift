@@ -6,8 +6,8 @@
 //  Copyright © 2018 abdelrahman.youssef. All rights reserved.
 //
 
-let ArabicWordsFile = "Arabic-Words.json"
-let EnglishWordsFile = "English-Words.json"
-let ConjugationsFile = "Conjugations.json"
+let ArabicWordsFile = "Arabic-Words"//.json
+let EnglishWordsFile = "English-Words"//.json
+let ConjugationsFile = "Conjugations"//.json
 
 
