@@ -106,7 +106,13 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                 return part.words.count > 0
             })
             
-            //order words descending
+//            //order words descending
+//            for part in PartOfSpeechArray{
+//
+//                part.words.sort({ (word1, word2) -> Bool in
+//                    return word1.wORD < word2.wORD
+//                })
+//            }
         }
         activityIndicator.stopAnimating()
     }

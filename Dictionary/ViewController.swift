@@ -163,9 +163,9 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
                 return enWord.wORD.lowercased().contains(searchBar.text!.lowercased())
             })
             //order results descending
-//            self.SearchResults.sort(by: { (word1, word2) -> Bool in
-//                return word1.wORD.
-//            })
+            self.SearchResults.sort(by: { (word1, word2) -> Bool in
+                return word1.wORD < word2.wORD
+            })
             
             tableView.reloadData()
             activityIndicator.stopAnimating()
