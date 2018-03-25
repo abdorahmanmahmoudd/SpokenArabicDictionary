@@ -164,7 +164,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
             })
             //order results descending
             self.SearchResults.sort(by: { (word1, word2) -> Bool in
-                return word1.wORD < word2.wORD
+                return word1.wORD.localizedCaseInsensitiveCompare(word2.wORD) == ComparisonResult.orderedAscending
             })
             
             tableView.reloadData()
