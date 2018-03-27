@@ -97,9 +97,9 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             for word in matchedArabicWords{
                 
-                if let partOfSpeech = Int(word.pARTOFSPEECH){
+                if let tempPartOfSpeech = Int(word.pARTOFSPEECH) , partOfSpeech.count > Int(word.pARTOFSPEECH)!{
                     
-                    self.PartOfSpeechArray[partOfSpeech + 1].words.append(word)
+                    self.PartOfSpeechArray[tempPartOfSpeech + 1].words.append(word)
                 }
             }
             self.PartOfSpeechArray = self.PartOfSpeechArray.filter({ (part) -> Bool in
