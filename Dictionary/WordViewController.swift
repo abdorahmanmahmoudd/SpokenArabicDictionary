@@ -74,7 +74,10 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         headerLabel.font = UIFont.italicSystemFont(ofSize: 18)
         
         headerLabel.attributedText = NSAttributedString(string: PartOfSpeechArray[section].partOfSpeechText, attributes:
-            [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
+            convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.underlineStyle): NSUnderlineStyle.single.rawValue]))
+        
+//        headerLabel.attributedText = NSAttributedString(string: PartOfSpeechArray[section].partOfSpeechText, attributes:
+//            [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
         
         headerView.addSubview(headerLabel)
 
@@ -97,9 +100,9 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             for word in matchedArabicWords{
                 
-                if let tempPartOfSpeech = Int(word.pARTOFSPEECH) , partOfSpeech.count > Int(word.pARTOFSPEECH)!{
+                if let partOfSpeech = Int(word.pARTOFSPEECH){
                     
-                    self.PartOfSpeechArray[tempPartOfSpeech + 1].words.append(word)
+                    self.PartOfSpeechArray[partOfSpeech + 1].words.append(word)
                 }
             }
             self.PartOfSpeechArray = self.PartOfSpeechArray.filter({ (part) -> Bool in
@@ -205,4 +208,15 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
 //
 //    }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

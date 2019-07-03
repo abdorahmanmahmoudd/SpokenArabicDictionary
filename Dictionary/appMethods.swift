@@ -17,8 +17,8 @@ func getFont(_ size:CGFloat,_ fontName:String)->UIFont
 
 func showAlert(title:String, message:String, vc:UIViewController, closure:(()->())?)
 {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    let okAction = UIAlertAction(title: "Ok", style: UIAlertActionStyle.default)
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default)
     { (result : UIAlertAction) -> Void in
         closure?()
     }
@@ -28,12 +28,12 @@ func showAlert(title:String, message:String, vc:UIViewController, closure:(()->(
 
 func showYesNoAlert(title:String, message:String, vc:UIViewController, closure:((Bool)->())?)
 {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    let okAction = UIAlertAction(title: "Yes", style: UIAlertActionStyle.default)
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    let okAction = UIAlertAction(title: "Yes", style: UIAlertAction.Style.default)
     { (result : UIAlertAction) -> Void in
         closure?(true)
     }
-    let cancelAction = UIAlertAction(title: "No", style: UIAlertActionStyle.default)
+    let cancelAction = UIAlertAction(title: "No", style: UIAlertAction.Style.default)
     { (result : UIAlertAction) -> Void in
         closure?(false)
     }
@@ -44,12 +44,12 @@ func showYesNoAlert(title:String, message:String, vc:UIViewController, closure:(
 
 func showYesNoAlert(title:String, message:String, vc:UIViewController, firstBtnTitle:String, secondBtnTitle:String,  closure:((Bool)->())?)
 {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    let okAction = UIAlertAction(title: firstBtnTitle, style: UIAlertActionStyle.default)
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+    let okAction = UIAlertAction(title: firstBtnTitle, style: UIAlertAction.Style.default)
     { (result : UIAlertAction) -> Void in
         closure?(true)
     }
-    let cancelAction = UIAlertAction(title: secondBtnTitle, style: UIAlertActionStyle.default)
+    let cancelAction = UIAlertAction(title: secondBtnTitle, style: UIAlertAction.Style.default)
     { (result : UIAlertAction) -> Void in
         closure?(false)
     }

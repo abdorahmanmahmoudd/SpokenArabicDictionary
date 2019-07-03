@@ -14,10 +14,10 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
     
-    var EnglishWords = [EnglishWord]()
-    var ArabicWords = [ArabicWord]()
-    var Conjugations = [Conjugation]()
-    var SearchResults = [EnglishWord]()
+    var englishWords = [EnglishWord]()
+    var arabicWords = [ArabicWord]()
+    var conjugations = [Conjugation]()
+    var searchResults = [EnglishWord]()
     var selectedWord : EnglishWord?
 
     override func viewDidLoad() {
@@ -30,7 +30,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
     func configuration(){
     
         self.searchBar.delegate = self
-        tableView.tableFooterView = UIView(frame:CGRect.zero)
+        tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain,
                                                                 target: nil, action: nil)
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.dismissKeyboard))
@@ -39,7 +39,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
     
     }
 
-    func dismissKeyboard(){
+    @objc func dismissKeyboard(){
         
         self.view.endEditing(true)
     }
@@ -74,7 +74,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
                         for item in json as! [Any]{
                             
                             if let i = item as? [String: Any]{
-                                self.EnglishWords.append(EnglishWord.init(fromDictionary: i))
+                                self.englishWords.append(EnglishWord.init(fromDictionary: i))
                             }
                         }
                     }
@@ -88,7 +88,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
                         for item in json as! [Any]{
                             
                             if let i = item as? [String: Any]{
-                                self.ArabicWords.append(ArabicWord.init(fromDictionary: i))
+                                self.arabicWords.append(ArabicWord.init(fromDictionary: i))
                             }
                         }
                     }
@@ -102,7 +102,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
                         for item in json as! [Any]{
                             
                             if let i = item as? [String: Any]{
-                                self.Conjugations.append(Conjugation.init(fromDictionary: i))
+                                self.conjugations.append(Conjugation.init(fromDictionary: i))
                             }
                         }
                     }
@@ -124,19 +124,19 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return (self.SearchResults.count)
+        return (self.searchResults.count)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
-        cell.textLabel?.text = self.SearchResults[indexPath.row].wORD
+        cell.textLabel?.text = self.searchResults[indexPath.row].wORD
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedWord = SearchResults[indexPath.row]
+        selectedWord = searchResults[indexPath.row]
         self.performSegue(withIdentifier: "wordSegue", sender: self)
     }
 
@@ -145,7 +145,7 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
         if segue.identifier == "wordSegue" {
             if let destinationController = segue.destination as? WordViewController{
                 destinationController.selectedWord = self.selectedWord
-                destinationController.matchedArabicWords = ArabicWords.filter({ (word) -> Bool in
+                destinationController.matchedArabicWords = arabicWords.filter({ (word) -> Bool in
                     return word.eNGLISHWORDID == self.selectedWord?.iD
                 })
             }
@@ -157,20 +157,20 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
         if searchBar.text != nil && searchBar.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0{
             
             activityIndicator.startAnimating()
-            self.SearchResults.removeAll()
+            self.searchResults.removeAll()
             
-            self.SearchResults = EnglishWords.filter({ (enWord) -> Bool in
+            self.searchResults = englishWords.filter({ (enWord) -> Bool in
                 return enWord.wORD.lowercased().contains(searchBar.text!.lowercased())
             })
             //order results descending
-            self.SearchResults.sort(by: { (word1, word2) -> Bool in
+            self.searchResults.sort(by: { (word1, word2) -> Bool in
                 return word1.wORD.localizedCaseInsensitiveCompare(word2.wORD) == ComparisonResult.orderedAscending
             })
             
             tableView.reloadData()
             activityIndicator.stopAnimating()
             
-            if SearchResults.count == 0{
+            if searchResults.count == 0{
                 
                 let NoResultAlert = UIAlertController(title: nil, message: "No results",preferredStyle: .alert)
                 NoResultAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
