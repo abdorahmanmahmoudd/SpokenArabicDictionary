@@ -7,33 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AC27B5922CD6CD400F54B47 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC27B5822CD6CD400F54B47 /* APIClient.swift */; };
+		3AC27B5C22CD883C00F54B47 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC27B5B22CD883C00F54B47 /* Requests.swift */; };
+		3AC27B5E22CD8D2200F54B47 /* JsonFilesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC27B5D22CD8D2200F54B47 /* JsonFilesController.swift */; };
 		BD145913206677EF00D8AF28 /* ArabicWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD145910206677EF00D8AF28 /* ArabicWord.swift */; };
 		BD145914206677EF00D8AF28 /* Conjugation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD145911206677EF00D8AF28 /* Conjugation.swift */; };
 		BD145915206677EF00D8AF28 /* EnglishWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD145912206677EF00D8AF28 /* EnglishWord.swift */; };
 		BD53ADB01F07FD7900BDE5DC /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD53ADAF1F07FD7900BDE5DC /* enums.swift */; };
 		BD95CE191F534FFF00E8315C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD95CE181F534FFF00E8315C /* StoreKit.framework */; };
-		BDAA08CD1F0BF85A0064DE7F /* ConnectionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */; };
 		BDF2BB7620652A2200B146A8 /* Arabic-Words.json in Resources */ = {isa = PBXBuildFile; fileRef = BDF2BB7320652A2200B146A8 /* Arabic-Words.json */; };
 		BDF2BB7720652A2200B146A8 /* English-Words.json in Resources */ = {isa = PBXBuildFile; fileRef = BDF2BB7420652A2200B146A8 /* English-Words.json */; };
 		BDF2BB7820652A2200B146A8 /* Conjugations.json in Resources */ = {isa = PBXBuildFile; fileRef = BDF2BB7520652A2200B146A8 /* Conjugations.json */; };
 		BDF2BB7A20652D6700B146A8 /* appConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2BB7920652D6700B146A8 /* appConstants.swift */; };
 		BDF2BB7C20652E8300B146A8 /* appMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF2BB7B20652E8300B146A8 /* appMethods.swift */; };
 		BDF860C81EFD5F66004EDBF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */; };
-		BDF860CA1EFD5F66004EDBF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF860C91EFD5F66004EDBF0 /* ViewController.swift */; };
+		BDF860CA1EFD5F66004EDBF0 /* SearchingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF860C91EFD5F66004EDBF0 /* SearchingViewController.swift */; };
 		BDF860CD1EFD5F66004EDBF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF860CB1EFD5F66004EDBF0 /* Main.storyboard */; };
-		BDF860D01EFD5F66004EDBF0 /* Dictionary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BDF860CE1EFD5F66004EDBF0 /* Dictionary.xcdatamodeld */; };
 		BDF860D21EFD5F66004EDBF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDF860D11EFD5F66004EDBF0 /* Assets.xcassets */; };
 		BDF860D51EFD5F66004EDBF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDF860D31EFD5F66004EDBF0 /* LaunchScreen.storyboard */; };
 		BDF860DD1EFD76B7004EDBF0 /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF860DC1EFD76B7004EDBF0 /* WordViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3AC27B5822CD6CD400F54B47 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		3AC27B5B22CD883C00F54B47 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		3AC27B5D22CD8D2200F54B47 /* JsonFilesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFilesController.swift; sourceTree = "<group>"; };
 		BD145910206677EF00D8AF28 /* ArabicWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArabicWord.swift; sourceTree = "<group>"; };
 		BD145911206677EF00D8AF28 /* Conjugation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conjugation.swift; sourceTree = "<group>"; };
 		BD145912206677EF00D8AF28 /* EnglishWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnglishWord.swift; sourceTree = "<group>"; };
 		BD53ADAF1F07FD7900BDE5DC /* enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
 		BD95CE181F534FFF00E8315C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionCheck.swift; path = ../ConnectionCheck.swift; sourceTree = "<group>"; };
 		BDF2BB7320652A2200B146A8 /* Arabic-Words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Arabic-Words.json"; sourceTree = SOURCE_ROOT; };
 		BDF2BB7420652A2200B146A8 /* English-Words.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "English-Words.json"; sourceTree = SOURCE_ROOT; };
 		BDF2BB7520652A2200B146A8 /* Conjugations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Conjugations.json; sourceTree = SOURCE_ROOT; };
@@ -41,9 +44,8 @@
 		BDF2BB7B20652E8300B146A8 /* appMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appMethods.swift; sourceTree = "<group>"; };
 		BDF860C41EFD5F66004EDBF0 /* Dictionary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dictionary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BDF860C91EFD5F66004EDBF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BDF860C91EFD5F66004EDBF0 /* SearchingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingViewController.swift; sourceTree = "<group>"; };
 		BDF860CC1EFD5F66004EDBF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BDF860CF1EFD5F66004EDBF0 /* Dictionary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dictionary.xcdatamodel; sourceTree = "<group>"; };
 		BDF860D11EFD5F66004EDBF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDF860D41EFD5F66004EDBF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDF860D61EFD5F66004EDBF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,84 +64,75 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BD1180711F52E1E7006A2C2B /* common */ = {
+		3AC27B5722CD6CA500F54B47 /* APIClient */ = {
 			isa = PBXGroup;
 			children = (
-				BD1180731F52E1FB006A2C2B /* app */,
-				BD1180721F52E1F1006A2C2B /* utilities */,
+				3AC27B5822CD6CD400F54B47 /* APIClient.swift */,
 			);
-			name = common;
+			path = APIClient;
 			sourceTree = "<group>";
 		};
-		BD1180721F52E1F1006A2C2B /* utilities */ = {
+		3AC27B5A22CD880C00F54B47 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				BDAA08CC1F0BF85A0064DE7F /* ConnectionCheck.swift */,
+				3AC27B5B22CD883C00F54B47 /* Requests.swift */,
 			);
-			name = utilities;
+			name = Requests;
 			sourceTree = "<group>";
 		};
-		BD1180731F52E1FB006A2C2B /* app */ = {
+		BD1180711F52E1E7006A2C2B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */,
 				BDF2BB7920652D6700B146A8 /* appConstants.swift */,
 				BDF2BB7B20652E8300B146A8 /* appMethods.swift */,
-				BDF860D31EFD5F66004EDBF0 /* LaunchScreen.storyboard */,
-				BD1180741F52E20B006A2C2B /* model */,
-			);
-			name = app;
-			sourceTree = "<group>";
-		};
-		BD1180741F52E20B006A2C2B /* model */ = {
-			isa = PBXGroup;
-			children = (
 				BD53ADAF1F07FD7900BDE5DC /* enums.swift */,
 			);
-			name = model;
+			name = Helpers;
 			sourceTree = "<group>";
 		};
-		BD1180771F52E260006A2C2B /* arabicTranslation */ = {
+		BD1180771F52E260006A2C2B /* ArabicTranslation */ = {
 			isa = PBXGroup;
 			children = (
-				BD11807A1F52E27A006A2C2B /* controller */,
-				BD1180791F52E274006A2C2B /* view */,
-				BD1180781F52E270006A2C2B /* model */,
+				3AC27B5A22CD880C00F54B47 /* Requests */,
+				BD11807A1F52E27A006A2C2B /* Controllers */,
+				BD1180791F52E274006A2C2B /* Views */,
+				BD1180781F52E270006A2C2B /* Models */,
 			);
-			name = arabicTranslation;
+			name = ArabicTranslation;
 			sourceTree = "<group>";
 		};
-		BD1180781F52E270006A2C2B /* model */ = {
+		BD1180781F52E270006A2C2B /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				BD145910206677EF00D8AF28 /* ArabicWord.swift */,
 				BD145911206677EF00D8AF28 /* Conjugation.swift */,
 				BD145912206677EF00D8AF28 /* EnglishWord.swift */,
 			);
-			name = model;
+			name = Models;
 			sourceTree = "<group>";
 		};
-		BD1180791F52E274006A2C2B /* view */ = {
+		BD1180791F52E274006A2C2B /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				BDF860CB1EFD5F66004EDBF0 /* Main.storyboard */,
 			);
-			name = view;
+			name = Views;
 			sourceTree = "<group>";
 		};
-		BD11807A1F52E27A006A2C2B /* controller */ = {
+		BD11807A1F52E27A006A2C2B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BD1459082065B82C00D8AF28 /* EnglishWordDetails */,
 				BD1459072065B82500D8AF28 /* Searching */,
 			);
-			name = controller;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		BD1459072065B82500D8AF28 /* Searching */ = {
 			isa = PBXGroup;
 			children = (
-				BDF860C91EFD5F66004EDBF0 /* ViewController.swift */,
+				BDF860C91EFD5F66004EDBF0 /* SearchingViewController.swift */,
+				3AC27B5D22CD8D2200F54B47 /* JsonFilesController.swift */,
 			);
 			name = Searching;
 			sourceTree = "<group>";
@@ -180,14 +173,16 @@
 		BDF860C61EFD5F66004EDBF0 /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
+				3AC27B5722CD6CA500F54B47 /* APIClient */,
 				BDF2BB7320652A2200B146A8 /* Arabic-Words.json */,
 				BDF2BB7520652A2200B146A8 /* Conjugations.json */,
 				BDF2BB7420652A2200B146A8 /* English-Words.json */,
-				BD1180771F52E260006A2C2B /* arabicTranslation */,
-				BD1180711F52E1E7006A2C2B /* common */,
+				BD1180711F52E1E7006A2C2B /* Helpers */,
+				BD1180771F52E260006A2C2B /* ArabicTranslation */,
+				BDF860C71EFD5F66004EDBF0 /* AppDelegate.swift */,
+				BDF860D31EFD5F66004EDBF0 /* LaunchScreen.storyboard */,
 				BDF860D11EFD5F66004EDBF0 /* Assets.xcassets */,
 				BDF860D61EFD5F66004EDBF0 /* Info.plist */,
-				BDF860CE1EFD5F66004EDBF0 /* Dictionary.xcdatamodeld */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -276,12 +271,13 @@
 			files = (
 				BDF2BB7C20652E8300B146A8 /* appMethods.swift in Sources */,
 				BD145915206677EF00D8AF28 /* EnglishWord.swift in Sources */,
+				3AC27B5C22CD883C00F54B47 /* Requests.swift in Sources */,
 				BD145914206677EF00D8AF28 /* Conjugation.swift in Sources */,
-				BDAA08CD1F0BF85A0064DE7F /* ConnectionCheck.swift in Sources */,
+				3AC27B5922CD6CD400F54B47 /* APIClient.swift in Sources */,
+				3AC27B5E22CD8D2200F54B47 /* JsonFilesController.swift in Sources */,
 				BD145913206677EF00D8AF28 /* ArabicWord.swift in Sources */,
 				BD53ADB01F07FD7900BDE5DC /* enums.swift in Sources */,
-				BDF860D01EFD5F66004EDBF0 /* Dictionary.xcdatamodeld in Sources */,
-				BDF860CA1EFD5F66004EDBF0 /* ViewController.swift in Sources */,
+				BDF860CA1EFD5F66004EDBF0 /* SearchingViewController.swift in Sources */,
 				BDF860DD1EFD76B7004EDBF0 /* WordViewController.swift in Sources */,
 				BDF860C81EFD5F66004EDBF0 /* AppDelegate.swift in Sources */,
 				BDF2BB7A20652D6700B146A8 /* appConstants.swift in Sources */,
@@ -483,19 +479,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		BDF860CE1EFD5F66004EDBF0 /* Dictionary.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				BDF860CF1EFD5F66004EDBF0 /* Dictionary.xcdatamodel */,
-			);
-			currentVersion = BDF860CF1EFD5F66004EDBF0 /* Dictionary.xcdatamodel */;
-			path = Dictionary.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = BDF860BC1EFD5F66004EDBF0 /* Project object */;
 }

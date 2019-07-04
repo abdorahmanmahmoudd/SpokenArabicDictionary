@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate{
+class SearchingViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate{
     
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var searchBar: UISearchBar!
@@ -51,11 +51,6 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
             tableView.deselectRow(at: tableView.indexPathForSelectedRow!, animated: true)
         }
         
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func fetchDataFromFiles(){
@@ -178,92 +173,6 @@ class ViewController: UIViewController ,UITableViewDelegate,UITableViewDataSourc
             
         }
     }
-    
-    //MARK: searching function was used in the online version
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//
-//
-//        if  searchBar.text != nil && ConnectionCheck.isConnectedToNetwork() {
-//
-//            var text = searchBar.text
-//
-//            if  searching == false {
-//                activityIndicator.startAnimating()
-//                searching = true
-//                self.SearchResults.removeAll()
-//                self.SearchResultsIds.removeAll()
-//                self.tableView.reloadData()
-//                text = text?.replacingOccurrences(of: " ", with: "%20")
-//                let data = text?.data(using: String.Encoding.ascii, allowLossyConversion: true)
-//                let nonemojiString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)! as String
-//                text = nonemojiString
-//
-//                if let url = URL(string: "http://spokenarabicdictionary.azurewebsites.net/api/english?word=" +  text! ){
-//
-//                    let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
-//
-//                        if error != nil {
-//                            print(error ?? "error")
-//
-//                        } else {
-//                            if  let urlContent = data {
-//                                do{
-//                                    let matchedWordsJson = try JSONSerialization.jsonObject(with: urlContent, options: .mutableContainers) as! [[String : AnyObject]]
-//
-//                                    for item in matchedWordsJson {
-//
-//                                        if let word = item["WORD"]{
-//
-//                                            self.SearchResults.append(word as! String)
-//
-//                                        }
-//                                        if let Id = item["ID"] {
-//
-//                                            self.SearchResultsIds.append(NSUUID(uuidString: (Id as! String))!)
-//                                        }
-//                                    }
-//                                    DispatchQueue.main.sync(execute: {
-//
-//                                        self.activityIndicator.alpha = 0
-//                                        self.activityIndicator.stopAnimating()
-//                                        self.tableView.reloadData()
-//                                        self.searching = false
-//                                    })
-//                                }
-//                                catch {
-//
-//                                    //print("json serialization fialed")
-//                                    let NoResultAlert = UIAlertController(title: nil, message: "No Results",preferredStyle: .alert)
-//
-//                                    NoResultAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//
-//                                    DispatchQueue.main.sync(execute: {
-//                                        self.activityIndicator.alpha = 0
-//                                        self.activityIndicator.stopAnimating()
-//                                        self.present(NoResultAlert, animated: true, completion: nil)
-//                                        self.searching = false
-//
-//                                    })
-//                                }
-//                            }
-//                        }
-//                    })
-//                    task.resume()
-//                }
-//            }
-//        } else {
-//
-//            let internetConnectionAlert = UIAlertController(title: "Warning", message: "There is no Internet connection",preferredStyle: .alert)
-//
-//            internetConnectionAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-//
-//            present(internetConnectionAlert, animated: true, completion: nil)
-//
-//        }
-//    }
-    
-    
-    
     
     
 }
