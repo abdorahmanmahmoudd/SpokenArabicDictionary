@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A07DD4B22D2A5EB0026B69E /* ArabicSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07DD4A22D2A5EB0026B69E /* ArabicSheet.swift */; };
+		3A07DD4D22D2A7AD0026B69E /* EnglishSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07DD4C22D2A7AD0026B69E /* EnglishSheet.swift */; };
+		3A07DD4F22D2A7ED0026B69E /* ConjugationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07DD4E22D2A7ED0026B69E /* ConjugationSheet.swift */; };
 		3AC27B5922CD6CD400F54B47 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC27B5822CD6CD400F54B47 /* APIClient.swift */; };
 		3AC27B5C22CD883C00F54B47 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC27B5B22CD883C00F54B47 /* Requests.swift */; };
 		3AC27B5E22CD8D2200F54B47 /* JsonFilesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC27B5D22CD8D2200F54B47 /* JsonFilesController.swift */; };
@@ -29,6 +32,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A07DD4A22D2A5EB0026B69E /* ArabicSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArabicSheet.swift; sourceTree = "<group>"; };
+		3A07DD4C22D2A7AD0026B69E /* EnglishSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishSheet.swift; sourceTree = "<group>"; };
+		3A07DD4E22D2A7ED0026B69E /* ConjugationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConjugationSheet.swift; sourceTree = "<group>"; };
 		3AC27B5822CD6CD400F54B47 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		3AC27B5B22CD883C00F54B47 /* Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		3AC27B5D22CD8D2200F54B47 /* JsonFilesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonFilesController.swift; sourceTree = "<group>"; };
@@ -107,6 +113,9 @@
 				BD145910206677EF00D8AF28 /* ArabicWord.swift */,
 				BD145911206677EF00D8AF28 /* Conjugation.swift */,
 				BD145912206677EF00D8AF28 /* EnglishWord.swift */,
+				3A07DD4A22D2A5EB0026B69E /* ArabicSheet.swift */,
+				3A07DD4C22D2A7AD0026B69E /* EnglishSheet.swift */,
+				3A07DD4E22D2A7ED0026B69E /* ConjugationSheet.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -273,12 +282,15 @@
 				BD145915206677EF00D8AF28 /* EnglishWord.swift in Sources */,
 				3AC27B5C22CD883C00F54B47 /* Requests.swift in Sources */,
 				BD145914206677EF00D8AF28 /* Conjugation.swift in Sources */,
+				3A07DD4F22D2A7ED0026B69E /* ConjugationSheet.swift in Sources */,
 				3AC27B5922CD6CD400F54B47 /* APIClient.swift in Sources */,
 				3AC27B5E22CD8D2200F54B47 /* JsonFilesController.swift in Sources */,
+				3A07DD4D22D2A7AD0026B69E /* EnglishSheet.swift in Sources */,
 				BD145913206677EF00D8AF28 /* ArabicWord.swift in Sources */,
 				BD53ADB01F07FD7900BDE5DC /* enums.swift in Sources */,
 				BDF860CA1EFD5F66004EDBF0 /* SearchingViewController.swift in Sources */,
 				BDF860DD1EFD76B7004EDBF0 /* WordViewController.swift in Sources */,
+				3A07DD4B22D2A5EB0026B69E /* ArabicSheet.swift in Sources */,
 				BDF860C81EFD5F66004EDBF0 /* AppDelegate.swift in Sources */,
 				BDF2BB7A20652D6700B146A8 /* appConstants.swift in Sources */,
 			);

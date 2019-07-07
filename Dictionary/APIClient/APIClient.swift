@@ -23,19 +23,19 @@ class APIClient {
             return
         }
         
-        let sessionConfiguration = URLSessionConfiguration.default
-        let session = URLSession.init(configuration: sessionConfiguration)
+        let session = URLSession.shared
         var request = URLRequest(url: fullUrl)
         request.httpMethod = "GET"
         
         session.dataTask(with: request) { (data, urlResponse, error) in
             if let error = error {
+                print(error.localizedDescription)
                 failure(error)
             }else {
                 if let data = data{
                     success(data)
                 }
             }
-        }
+        }.resume()
     }
 }

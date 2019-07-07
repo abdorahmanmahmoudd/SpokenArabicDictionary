@@ -43,7 +43,7 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cellIdentifier = "DetailsCell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
-        cell.textLabel?.text = PartOfSpeechArray[indexPath.section].words[indexPath.row].wORD
+        cell.textLabel?.text = PartOfSpeechArray[indexPath.section].words[indexPath.row].WORD
         
         return cell
     }
@@ -91,7 +91,7 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         activityIndicator.startAnimating()
         if let word = selectedWord{
             
-            self.wordLabel.text = word.wORD
+            self.wordLabel.text = word.WORD
             
             for item in partOfSpeech {
                 
@@ -100,7 +100,7 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             for word in matchedArabicWords{
                 
-                if let partOfSpeech = Int(word.pARTOFSPEECH){
+                if let partOfSpeech = Int(word.PARTOFSPEECH ?? ""){
                     
                     self.PartOfSpeechArray[partOfSpeech + 1].words.append(word)
                 }

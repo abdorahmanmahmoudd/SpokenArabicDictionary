@@ -19,16 +19,25 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
     var conjugations = [Conjugation]()
     var searchResults = [EnglishWord]()
     var selectedWord : EnglishWord?
+    
+    var jsonFilesController: JsonFilesController?
+    var filesIsUptoDate = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        activityIndicator.startAnimating()
         configuration()
-        fetchDataFromFiles()
+        jsonFilesController = JsonFilesController()
+        jsonFilesController?.updateJsonFiles(withCompletion: { [weak self] in
+            self?.fetchDataFromFiles()
+            self?.activityIndicator.stopAnimating()
+            self?.filesIsUptoDate = true
+        })
     }
     
     func configuration(){
-    
+        
         self.searchBar.delegate = self
         tableView.tableFooterView = UIView()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain,
@@ -36,7 +45,6 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.dismissKeyboard))
         tapGesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGesture)
-    
     }
 
     @objc func dismissKeyboard(){
@@ -55,8 +63,11 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
     
     func fetchDataFromFiles(){
         
-        activityIndicator.startAnimating()
-        
+        let jsonDecoder = JSONDecoder()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ" //2019-07-01T01:44:24.3381583+02:00
+        jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
+                
         DispatchQueue.global(qos: .userInitiated).async {
             
             do {
@@ -64,13 +75,8 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
                     
                     if let fileData = try? Data.init(contentsOf: englishFilePath, options: .mappedIfSafe){
                         
-                        let json = try JSONSerialization.jsonObject(with: fileData, options: .mutableContainers)
-                        
-                        for item in json as! [Any]{
-                            
-                            if let i = item as? [String: Any]{
-                                self.englishWords.append(EnglishWord.init(fromDictionary: i))
-                            }
+                        if let englishSheet = try? jsonDecoder.decode(EnglishSheet.self, from: fileData) {
+                            self.englishWords = englishSheet.words
                         }
                     }
                 }
@@ -78,13 +84,8 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
                     
                     if let fileData = try? Data.init(contentsOf: arabicFilePath, options: .mappedIfSafe){
                         
-                        let json = try JSONSerialization.jsonObject(with: fileData, options: .mutableContainers)
-                        
-                        for item in json as! [Any]{
-                            
-                            if let i = item as? [String: Any]{
-                                self.arabicWords.append(ArabicWord.init(fromDictionary: i))
-                            }
+                        if let arabicSheet = try? jsonDecoder.decode(ArabicSheet.self, from: fileData) {
+                            self.arabicWords = arabicSheet.words
                         }
                     }
                 }
@@ -92,13 +93,8 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
                     
                     if let fileData = try? Data.init(contentsOf: conjugationsFilePath, options: .mappedIfSafe){
                         
-                        let json = try JSONSerialization.jsonObject(with: fileData, options: .mutableContainers)
-                        
-                        for item in json as! [Any]{
-                            
-                            if let i = item as? [String: Any]{
-                                self.conjugations.append(Conjugation.init(fromDictionary: i))
-                            }
+                        if let conjugationSheet = try? jsonDecoder.decode(ConjugationSheet.self, from: fileData) {
+                            self.conjugations = conjugationSheet.words
                         }
                     }
                 }
@@ -125,7 +121,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
-        cell.textLabel?.text = self.searchResults[indexPath.row].wORD
+        cell.textLabel?.text = self.searchResults[indexPath.row].WORD
         return cell
     }
     
@@ -141,7 +137,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             if let destinationController = segue.destination as? WordViewController{
                 destinationController.selectedWord = self.selectedWord
                 destinationController.matchedArabicWords = arabicWords.filter({ (word) -> Bool in
-                    return word.eNGLISHWORDID == self.selectedWord?.iD
+                    return word.ENGLISHWORDID == self.selectedWord?.ID
                 })
             }
         }
@@ -149,17 +145,17 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         
-        if searchBar.text != nil && searchBar.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0{
+        if searchBar.text != nil && searchBar.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 && filesIsUptoDate{
             
             activityIndicator.startAnimating()
             self.searchResults.removeAll()
             
             self.searchResults = englishWords.filter({ (enWord) -> Bool in
-                return enWord.wORD.lowercased().contains(searchBar.text!.lowercased())
+                return (enWord.WORD?.lowercased() ?? "").contains(searchBar.text!.lowercased())
             })
             //order results descending
             self.searchResults.sort(by: { (word1, word2) -> Bool in
-                return word1.wORD.localizedCaseInsensitiveCompare(word2.wORD) == ComparisonResult.orderedAscending
+                return word1.WORD?.localizedCaseInsensitiveCompare(word2.WORD ?? "") == ComparisonResult.orderedAscending
             })
             
             tableView.reloadData()
