@@ -34,6 +34,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             self?.activityIndicator.stopAnimating()
             self?.filesIsUptoDate = true
             self?.searchBar.isUserInteractionEnabled = true
+            self?.searchBar.text = ""
         })
     }
     
@@ -74,7 +75,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             do {
                 
                 // to check the downloaded file first
-                if let filePath = self.checkFileExists(withLink: EnglishWordsFile), false {
+                if let filePath = self.checkFileExists(withLink: EnglishWordsFile) {
                     let fileData = try Data.init(contentsOf: filePath, options: .mappedIfSafe)
                     let englishSheet = try jsonDecoder.decode(EnglishSheet.self, from: fileData)
                     self.englishWords = englishSheet.words
@@ -95,7 +96,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
                 
                 
                 // to check the downloaded file first
-                if let filePath = self.checkFileExists(withLink: ArabicWordsFile), false {
+                if let filePath = self.checkFileExists(withLink: ArabicWordsFile) {
                     let fileData = try Data.init(contentsOf: filePath, options: .mappedIfSafe)
                     let arabicSheet = try jsonDecoder.decode(ArabicSheet.self, from: fileData)
                     self.arabicWords = arabicSheet.words
@@ -115,7 +116,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             do {
                 
                 // to check the downloaded file first
-                if let filePath = self.checkFileExists(withLink: ConjugationsFile), false {
+                if let filePath = self.checkFileExists(withLink: ConjugationsFile) {
                     let fileData = try Data.init(contentsOf: filePath, options: .mappedIfSafe)
                     let conjugationSheet = try jsonDecoder.decode(ConjugationSheet.self, from: fileData)
                     self.conjugations = conjugationSheet.words
