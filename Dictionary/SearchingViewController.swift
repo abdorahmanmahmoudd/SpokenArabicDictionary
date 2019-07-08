@@ -22,7 +22,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
     
     var jsonFilesController: JsonFilesController?
     var filesIsUptoDate = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,6 +33,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             self?.fetchDataFromFiles()
             self?.activityIndicator.stopAnimating()
             self?.filesIsUptoDate = true
+            self?.searchBar.isUserInteractionEnabled = true
         })
     }
     
@@ -46,7 +47,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         tapGesture.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapGesture)
     }
-
+    
     @objc func dismissKeyboard(){
         
         self.view.endEditing(true)
@@ -67,50 +68,95 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ" //2019-07-01T01:44:24.3381583+02:00
         jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
-                
+        
         DispatchQueue.global(qos: .userInitiated).async {
             
             do {
-                if let englishFilePath = Bundle.main.url(forResource: EnglishWordsFile, withExtension: ".json"){
-                    
-                    if let fileData = try? Data.init(contentsOf: englishFilePath, options: .mappedIfSafe){
-                        
-                        if let englishSheet = try? jsonDecoder.decode(EnglishSheet.self, from: fileData) {
-                            self.englishWords = englishSheet.words
-                        }
-                    }
-                }
-                if let arabicFilePath = Bundle.main.url(forResource: ArabicWordsFile, withExtension: ".json"){
-                    
-                    if let fileData = try? Data.init(contentsOf: arabicFilePath, options: .mappedIfSafe){
-                        
-                        if let arabicSheet = try? jsonDecoder.decode(ArabicSheet.self, from: fileData) {
-                            self.arabicWords = arabicSheet.words
-                        }
-                    }
-                }
-                if let conjugationsFilePath = Bundle.main.url(forResource: ConjugationsFile, withExtension: ".json"){
-                    
-                    if let fileData = try? Data.init(contentsOf: conjugationsFilePath, options: .mappedIfSafe){
-                        
-                        if let conjugationSheet = try? jsonDecoder.decode(ConjugationSheet.self, from: fileData) {
-                            self.conjugations = conjugationSheet.words
-                        }
-                    }
-                }
                 
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
+                // to check the downloaded file first
+                if let filePath = self.checkFileExists(withLink: EnglishWordsFile), false {
+                    let fileData = try Data.init(contentsOf: filePath, options: .mappedIfSafe)
+                    let englishSheet = try jsonDecoder.decode(EnglishSheet.self, from: fileData)
+                    self.englishWords = englishSheet.words
+                    
+                } else {
+                    // to check the offline file
+                    if let englishFilePath = Bundle.main.url(forResource: EnglishWordsFile, withExtension: ".json"){
+                        let fileData = try Data.init(contentsOf: englishFilePath, options: .mappedIfSafe)
+                        let englishSheet = try jsonDecoder.decode(EnglishSheet.self, from: fileData)
+                        self.englishWords = englishSheet.words
+                    }
                 }
-                
-            }catch let err {
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    showAlert(title: "", message: err.localizedDescription, vc: self, closure: nil)
-                }
+            }catch let error {
+                print(error)
             }
             
+            do {
+                
+                
+                // to check the downloaded file first
+                if let filePath = self.checkFileExists(withLink: ArabicWordsFile), false {
+                    let fileData = try Data.init(contentsOf: filePath, options: .mappedIfSafe)
+                    let arabicSheet = try jsonDecoder.decode(ArabicSheet.self, from: fileData)
+                    self.arabicWords = arabicSheet.words
+                    
+                } else {
+                    // to check the offline file
+                    if let arabicFilePath = Bundle.main.url(forResource: ArabicWordsFile, withExtension: ".json"){
+                        let fileData = try Data.init(contentsOf: arabicFilePath, options: .mappedIfSafe)
+                        let arabicSheet = try jsonDecoder.decode(ArabicSheet.self, from: fileData)
+                        self.arabicWords = arabicSheet.words
+                    }
+                }
+            }catch let error {
+                print(error)
+            }
+            
+            do {
+                
+                // to check the downloaded file first
+                if let filePath = self.checkFileExists(withLink: ConjugationsFile), false {
+                    let fileData = try Data.init(contentsOf: filePath, options: .mappedIfSafe)
+                    let conjugationSheet = try jsonDecoder.decode(ConjugationSheet.self, from: fileData)
+                    self.conjugations = conjugationSheet.words
+                    
+                } else {
+                    // to check the offline file
+                    if let conjugationsFilePath = Bundle.main.url(forResource: ConjugationsFile, withExtension: ".json"){
+                        let fileData = try Data.init(contentsOf: conjugationsFilePath, options: .mappedIfSafe)
+                        let conjugationSheet = try jsonDecoder.decode(ConjugationSheet.self, from: fileData)
+                        self.conjugations = conjugationSheet.words
+                    }
+                }
+                
+            }catch let error {
+                print(error)
+            }
+            
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
         }
+    }
+    
+    func checkFileExists(withLink link: String) -> URL? {
+        let urlString = link.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        if let url  = URL.init(string: urlString ?? ""){
+            let fileManager = FileManager.default
+            if let documentDirectory = try? fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: false){
+                let filePath = documentDirectory.appendingPathComponent(url.lastPathComponent, isDirectory: false)
+                if let fileExists = try? filePath.checkResourceIsReachable(), fileExists {
+                    print("file exist")
+                    if let fileData = try? Data.init(contentsOf: filePath, options: .mappedIfSafe){
+                        if fileData.count > 0 {
+                            return filePath
+                        }
+                    }
+                }
+            }
+        }
+        print("file doesnt exist")
+        return nil
     }
     
     
@@ -130,14 +176,14 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         selectedWord = searchResults[indexPath.row]
         self.performSegue(withIdentifier: "wordSegue", sender: self)
     }
-
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "wordSegue" {
             if let destinationController = segue.destination as? WordViewController{
                 destinationController.selectedWord = self.selectedWord
                 destinationController.matchedArabicWords = arabicWords.filter({ (word) -> Bool in
-                    return word.ENGLISHWORDID == self.selectedWord?.ID
+                    return word.ENGLISH_WORD_ID == self.selectedWord?.ID
                 })
             }
         }
@@ -151,6 +197,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             self.searchResults.removeAll()
             
             self.searchResults = englishWords.filter({ (enWord) -> Bool in
+                //                print((enWord.WORD ?? "") + ", ")
                 return (enWord.WORD?.lowercased() ?? "").contains(searchBar.text!.lowercased())
             })
             //order results descending
@@ -166,7 +213,9 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
                 let NoResultAlert = UIAlertController(title: nil, message: "No results",preferredStyle: .alert)
                 NoResultAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
             }
-            
+        }else if searchBar.text != nil && searchBar.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 && !filesIsUptoDate {
+            searchBar.text = "Updating data..."
+            searchBar.isUserInteractionEnabled = false
         }
     }
     

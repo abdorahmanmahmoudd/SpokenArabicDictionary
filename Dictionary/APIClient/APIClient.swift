@@ -33,6 +33,7 @@ class APIClient {
                 failure(error)
             }else {
                 if let data = data{
+                    print(data.description)
                     success(data)
                 }
             }

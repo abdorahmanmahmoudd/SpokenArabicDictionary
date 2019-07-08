@@ -46,16 +46,21 @@ class JsonFilesController {
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ" //2019-07-01T01:44:24.3381583+02:00
             jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
             
-            if let data = data, let _ = try? jsonDecoder.decode(ArabicSheet.self, from: data) {
-        
-                let fileManager = FileManager.default
-                if let documentDirectory = try? fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: false){
+            do  {
+                if let data = data {
                     
+                    let _ = try jsonDecoder.decode(ArabicSheet.self, from: data)
+                    let fileManager = FileManager.default
+                    let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
                     let filePath = documentDirectory.appendingPathComponent(ArabicWordsFile , isDirectory: false)
-                    try? data.write(to: filePath, options: Data.WritingOptions.completeFileProtection)
+                    print(filePath.absoluteString)
+                    try data.write(to: filePath, options: Data.WritingOptions.completeFileProtection)
                     
                 }
+            }catch let error {
+                print(error)
             }
+            
             self.dispatchGroup?.leave()
             
         }) { [weak self] (error) in
@@ -80,14 +85,17 @@ class JsonFilesController {
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ" //2019-07-01T01:44:24.3381583+02:00
             jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
             
-            if let data = data, let _ = try? jsonDecoder.decode(EnglishSheet.self, from: data) {
-                let fileManager = FileManager.default
-                if let documentDirectory = try? fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: false){
-                    
+            do {
+                if let data = data {
+                    let _ = try jsonDecoder.decode(EnglishSheet.self, from: data)
+                    let fileManager = FileManager.default
+                    let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
                     let filePath = documentDirectory.appendingPathComponent(EnglishWordsFile , isDirectory: false)
-                    try? data.write(to: filePath, options: Data.WritingOptions.completeFileProtection)
-                    
+                    print(filePath.absoluteString)
+                    try data.write(to: filePath, options: Data.WritingOptions.completeFileProtection)
                 }
+            } catch let error {
+                print(error)
             }
             
             self.dispatchGroup?.leave()
@@ -114,15 +122,19 @@ class JsonFilesController {
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ" //2019-07-01T01:44:24.3381583+02:00
             jsonDecoder.dateDecodingStrategy = .formatted(dateFormatter)
             
-            if let data = data, let _ = try? jsonDecoder.decode(ConjugationSheet.self, from: data) {
-                let fileManager = FileManager.default
-                if let documentDirectory = try? fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: false){
-                    
+            do {
+                if let data = data {
+                    let _ = try jsonDecoder.decode(ConjugationSheet.self, from: data)
+                    let fileManager = FileManager.default
+                    let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor:nil, create: true)
                     let filePath = documentDirectory.appendingPathComponent(ConjugationsFile , isDirectory: false)
-                    try? data.write(to: filePath, options: Data.WritingOptions.completeFileProtection)
-                    
+                    print(filePath.absoluteString)
+                    try data.write(to: filePath, options: Data.WritingOptions.completeFileProtection)
                 }
+            } catch let error {
+                print(error)
             }
+            
             self.dispatchGroup?.leave()
             
         }) { [weak self] (error) in

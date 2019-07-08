@@ -33,5 +33,5 @@ import Foundation
 //    case pastContinuous = 8
 //}
 
-public let partOfSpeech = [ "blank", "adjective" , "adverb" , "article" , "conjunction", "interjection" ,"noun" ,"preposition" , "pronoun" , "verb"]
+public let partOfSpeechCategory = [ "blank", "adjective" , "adverb" , "article" , "conjunction", "interjection" ,"noun" ,"preposition" , "pronoun" , "verb"]
 

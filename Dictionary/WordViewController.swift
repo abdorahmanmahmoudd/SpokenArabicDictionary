@@ -26,11 +26,6 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         fillData()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     func configuration(){
     
         tableView.tableFooterView = UIView(frame:CGRect.zero)
@@ -54,11 +49,6 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) ->String?{
-        return PartOfSpeechArray[section].partOfSpeechText
-        
-    }
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UIView(frame: CGRect(x: 16, y: 0, width: tableView.frame.size.width, height: 40))
@@ -73,8 +63,10 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         headerLabel.font = UIFont.italicSystemFont(ofSize: 18)
         
-        headerLabel.attributedText = NSAttributedString(string: PartOfSpeechArray[section].partOfSpeechText, attributes:
-            convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.underlineStyle): NSUnderlineStyle.single.rawValue]))
+        if PartOfSpeechArray[section].partOfSpeechText != partOfSpeechCategory[0] { // blank case
+            headerLabel.attributedText = NSAttributedString(string: PartOfSpeechArray[section].partOfSpeechText, attributes:
+                convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.underlineStyle): NSUnderlineStyle.single.rawValue]))
+        }
         
 //        headerLabel.attributedText = NSAttributedString(string: PartOfSpeechArray[section].partOfSpeechText, attributes:
 //            [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue])
@@ -93,14 +85,14 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             
             self.wordLabel.text = word.WORD
             
-            for item in partOfSpeech {
+            for item in partOfSpeechCategory {
                 
                 self.PartOfSpeechArray.append((partOfSpeechText: item , words: []))
             }
             
             for word in matchedArabicWords{
-                
-                if let partOfSpeech = Int(word.PARTOFSPEECH ?? ""){
+
+                if let partOfSpeech = word.PART_OF_SPEECH {
                     
                     self.PartOfSpeechArray[partOfSpeech + 1].words.append(word)
                 }
@@ -119,95 +111,6 @@ class WordViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         activityIndicator.stopAnimating()
     }
-    
-    //MARK: translation func was used in the online version
-//    func wordTranslation(){
-//
-//        if let id =  wordId {
-//            //2CF6360E-B325-CB47-98D5-C61AFE408AB1
-//            let url = URL(string: "http://spokenarabicdictionary.azurewebsites.net/api/English/translate?Id=" + id.uuidString )
-//            activityIndicator.startAnimating()
-//            activityIndicator.alpha = 1
-//            let task = URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-//
-//                if error != nil {
-//                    self.activityIndicator.stopAnimating()
-//                    self.activityIndicator.alpha = 0
-//                    print(error ?? "error at translation")
-//
-//                } else {
-//
-//                    if  let urlContent = data {
-//
-//                        do{
-//
-//                            let JSONResult = try JSONSerialization.jsonObject(with: urlContent, options: .mutableContainers) as! [[String : AnyObject]]
-//
-//                            for item in partOfSpeech {
-//
-//                                self.PartOfSpeechArray.append((partOfSpeechText: item , record: (Ids: [], Meanings: [])))
-//                            }
-//
-//                            for item in JSONResult {
-//
-//                                if let partOfSpeechValue = item["PART_OF_SPEECH"]  {
-//
-//                                    var tempWord : String?
-//                                    var tempId : NSUUID?
-//
-//                                    if let wordText = item["WORD"]{
-//
-//                                        tempWord = (wordText as! String)
-//                                    }
-//                                    if let idValue = item["ID"]{
-//
-//                                        tempId = (NSUUID(uuidString: (idValue as! String))!)
-//                                    }
-//
-//                                    if tempId != nil && tempWord != nil && partOfSpeechValue as? Int != nil{
-//
-//                                        self.PartOfSpeechArray[(partOfSpeechValue as! Int) + 1].record.Ids.append(tempId!)
-//                                        self.PartOfSpeechArray[(partOfSpeechValue as! Int) + 1].record.Meanings.append(tempWord!)
-//                                    }
-//
-//                                }
-//                            }
-//                            self.PartOfSpeechArray[1].partOfSpeechText = ""
-//                            var i = 0
-//                            for speechPart in self.PartOfSpeechArray {
-//
-//                                if !(speechPart.record.Meanings.count > 0) {
-//
-//                                    self.PartOfSpeechArray.remove(at: i)
-//                                }else{
-//                                    i += 1
-//                                }
-//
-//                            }
-//                        }
-//                        catch {
-//
-//                            print("json serialization fialed")
-//
-//                        }
-//
-//                        DispatchQueue.main.sync(execute: {
-//
-//                            self.activityIndicator.stopAnimating()
-//                            self.activityIndicator.alpha = 0
-//                            self.tableView.reloadData()
-//
-//                        })
-//
-//                    }
-//                }
-//            })
-//
-//            task.resume()
-//        }
-//
-//    }
-    
 }
 
 // Helper function inserted by Swift 4.2 migrator.

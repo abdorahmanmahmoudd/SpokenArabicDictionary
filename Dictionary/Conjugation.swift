@@ -8,7 +8,7 @@ import Foundation
 class Conjugation : Codable {
 
 	var ANA : String?
-	var CONJUGATIONTYPE : String?
+	var CONJUGATION_TYPE : String?
 	var FEMALEPL : String?
 	var FEMALES : String?
 	var HIYYE : String?

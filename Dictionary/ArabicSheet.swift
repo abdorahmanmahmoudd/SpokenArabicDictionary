@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ArabicSheet : Codable{
+class ArabicSheet : Decodable {
     
     var lastModified : String = ""
     var words : [ArabicWord] = [ArabicWord]()
