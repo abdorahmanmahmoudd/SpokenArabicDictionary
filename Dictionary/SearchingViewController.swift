@@ -30,18 +30,13 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         activityIndicator.startAnimating()
         configuration()
         jsonFilesController = JsonFilesController()
-        fetchDataFromFiles()
-        activityIndicator.stopAnimating()
-        filesIsUptoDate = true
-        searchBar.isUserInteractionEnabled = true
-        searchBar.text = ""
-//        jsonFilesController?.updateJsonFiles(withCompletion: { [weak self] in
-//            self?.fetchDataFromFiles()
-//            self?.activityIndicator.stopAnimating()
-//            self?.filesIsUptoDate = true
-//            self?.searchBar.isUserInteractionEnabled = true
-//            self?.searchBar.text = ""
-//        })
+        jsonFilesController?.updateJsonFiles(withCompletion: { [weak self] in
+            self?.fetchDataFromFiles()
+            self?.activityIndicator.stopAnimating()
+            self?.filesIsUptoDate = true
+            self?.searchBar.isUserInteractionEnabled = true
+            self?.searchBar.text = ""
+        })
     }
     
     func configuration(){
