@@ -173,7 +173,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         if section == 0 {
             return ""
         }
-        let separator = "-------------"
+        let separator = " "
         return separator
     }
     
