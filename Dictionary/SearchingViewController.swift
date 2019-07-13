@@ -13,11 +13,12 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var noResultsLabel: UILabel!
     
     var englishWords = [EnglishWord]()
     var arabicWords = [ArabicWord]()
     var conjugations = [Conjugation]()
-    var searchResults = [EnglishWord]()
+    var searchResults: [[EnglishWord]] = [[]]
     var selectedWord : EnglishWord?
     
     var jsonFilesController: JsonFilesController?
@@ -29,13 +30,18 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         activityIndicator.startAnimating()
         configuration()
         jsonFilesController = JsonFilesController()
-        jsonFilesController?.updateJsonFiles(withCompletion: { [weak self] in
-            self?.fetchDataFromFiles()
-            self?.activityIndicator.stopAnimating()
-            self?.filesIsUptoDate = true
-            self?.searchBar.isUserInteractionEnabled = true
-            self?.searchBar.text = ""
-        })
+        fetchDataFromFiles()
+        activityIndicator.stopAnimating()
+        filesIsUptoDate = true
+        searchBar.isUserInteractionEnabled = true
+        searchBar.text = ""
+//        jsonFilesController?.updateJsonFiles(withCompletion: { [weak self] in
+//            self?.fetchDataFromFiles()
+//            self?.activityIndicator.stopAnimating()
+//            self?.filesIsUptoDate = true
+//            self?.searchBar.isUserInteractionEnabled = true
+//            self?.searchBar.text = ""
+//        })
     }
     
     func configuration(){
@@ -160,24 +166,34 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
         return nil
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return searchResults.count
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return (self.searchResults.count)
+        return searchResults[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return ""
+        }
+        let separator = "-------------"
+        return separator
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
-        cell.textLabel?.text = self.searchResults[indexPath.row].WORD
+        cell.textLabel?.text = searchResults[indexPath.section][indexPath.row].WORD
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        selectedWord = searchResults[indexPath.row]
+        selectedWord = searchResults[indexPath.section][indexPath.row]
         self.performSegue(withIdentifier: "wordSegue", sender: self)
     }
-    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "wordSegue" {
@@ -197,29 +213,75 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             activityIndicator.startAnimating()
             self.searchResults.removeAll()
             
-            self.searchResults = englishWords.filter({ (enWord) -> Bool in
-                //                print((enWord.WORD ?? "") + ", ")
-                return (enWord.WORD?.lowercased() ?? "").contains(searchBar.text!.lowercased())
-            })
-            //order results descending
-            self.searchResults.sort(by: { (word1, word2) -> Bool in
-                return word1.WORD?.localizedCaseInsensitiveCompare(word2.WORD ?? "") == ComparisonResult.orderedAscending
-            })
+            var exactWordResult = [EnglishWord]()
+            var inbetweenResults = [EnglishWord]()
+            var startsWithResults = [EnglishWord]()
+            var containResults = [EnglishWord]()
+            
+            for word in englishWords {
+                // search for exact word
+                if (word.WORD?.lowercased() ?? "").elementsEqual(searchBar.text!.lowercased()) {
+                    exactWordResult.append(word)
+                }
+                
+                // results for word inbetween words
+                else if (word.WORD?.lowercased() ?? "").contains(" \( searchBar.text!.lowercased()) ") {
+                    inbetweenResults.append(word)
+                }
+                
+                // results starts with the word
+                else if (word.WORD?.lowercased() ?? "").starts(with: searchBar.text!.lowercased()) {
+                    startsWithResults.append(word)
+                }
+            
+                // result contains the word
+                else
+                    if (word.WORD?.lowercased() ?? "").contains(searchBar.text!.lowercased()) {
+                    containResults.append(word)
+                }
+            }
+        
+            print("exactWordResult: \(exactWordResult.count)")
+            if exactWordResult.count > 0 {
+                searchResults.append(exactWordResult)
+            }
+            
+            
+            print("inbetweenResults: \(exactWordResult.count)")
+            if inbetweenResults.count > 0 {
+                searchResults.append(inbetweenResults)
+            }
+            
+            
+            print("startsWithResults: \(startsWithResults.count)")
+            if startsWithResults.count > 0 {
+                searchResults.append(startsWithResults)
+            }
+            
+            print("containResults: \(containResults.count)")
+            if containResults.count > 0 {
+                searchResults.append(containResults)
+            }
+            
+//            //order results descending
+//            self.searchResults.sort(by: { (word1, word2) -> Bool in
+//                return word1.WORD?.localizedCaseInsensitiveCompare(word2.WORD ?? "") == ComparisonResult.orderedAscending
+//            })
             
             tableView.reloadData()
             activityIndicator.stopAnimating()
             
-            if searchResults.count == 0{
-                
-                let NoResultAlert = UIAlertController(title: nil, message: "No results",preferredStyle: .alert)
-                NoResultAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            if searchResults.count == 0 {
+                noResultsLabel.isHidden = false
+            }else {
+                noResultsLabel.isHidden = true
             }
+            
         }else if searchBar.text != nil && searchBar.text!.trimmingCharacters(in: .whitespacesAndNewlines).count > 0 && !filesIsUptoDate {
             searchBar.text = "Updating data..."
             searchBar.isUserInteractionEnabled = false
         }
     }
-    
     
 }
 
