@@ -264,6 +264,7 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
 //            })
             
             tableView.reloadData()
+            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
             activityIndicator.stopAnimating()
             
             if searchResults.count == 0 {
