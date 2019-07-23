@@ -244,27 +244,34 @@ class SearchingViewController: UIViewController ,UITableViewDelegate,UITableView
             
             print("inbetweenResults: \(exactWordResult.count)")
             if inbetweenResults.count > 0 {
+                //order results descending
+                inbetweenResults.sort(by: { (word1, word2) -> Bool in
+                    return word1.WORD?.localizedCaseInsensitiveCompare(word2.WORD ?? "") == ComparisonResult.orderedAscending
+                })
                 searchResults.append(inbetweenResults)
             }
             
             
             print("startsWithResults: \(startsWithResults.count)")
             if startsWithResults.count > 0 {
+                //order results descending
+                startsWithResults.sort(by: { (word1, word2) -> Bool in
+                    return word1.WORD?.localizedCaseInsensitiveCompare(word2.WORD ?? "") == ComparisonResult.orderedAscending
+                })
                 searchResults.append(startsWithResults)
             }
             
             print("containResults: \(containResults.count)")
             if containResults.count > 0 {
+                //order results descending
+                containResults.sort(by: { (word1, word2) -> Bool in
+                    return word1.WORD?.localizedCaseInsensitiveCompare(word2.WORD ?? "") == ComparisonResult.orderedAscending
+                })
                 searchResults.append(containResults)
             }
             
-//            //order results descending
-//            self.searchResults.sort(by: { (word1, word2) -> Bool in
-//                return word1.WORD?.localizedCaseInsensitiveCompare(word2.WORD ?? "") == ComparisonResult.orderedAscending
-//            })
-            
             tableView.reloadData()
-            tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            tableView.setContentOffset(CGPoint.zero, animated: true)
             activityIndicator.stopAnimating()
             
             if searchResults.count == 0 {
